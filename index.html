@@ -1,351 +1,209 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>周栩 Nicole | AI产品经理</title>
-    <style>
-        /* Apple-inspired Reset & Variables */
-        :root {
-            --bg-color: #0a0a0a;
-            --surface-color: #1a1a1a;
-            --text-primary: #f5f5f7;
-            --text-secondary: #86868b;
-            --accent-gradient: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            --transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Helvetica Neue", Arial, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        /* Glassmorphism Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            padding: 20px 5%;
-            background: rgba(10, 10, 10, 0.7);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            z-index: 100;
-            display: flex;
-            justify-content: space-between;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-
-        nav h3 {
-            font-size: 1.2rem;
-            font-weight: 600;
-            letter-spacing: 1px;
-        }
-
-        /* Container & Animations */
-        .container {
-            max-width: 1100px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
-
-        .fade-in-up {
-            opacity: 0;
-            transform: translateY(40px);
-            transition: var(--transition);
-        }
-
-        .fade-in-up.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        /* Hero Section */
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            position: relative;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 8vw, 6rem);
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            margin-bottom: 20px;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .hero p {
-            font-size: 1.5rem;
-            color: var(--text-secondary);
-            max-width: 800px;
-            margin-bottom: 40px;
-        }
-
-        /* Data Section */
-        .data-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 24px;
-            margin: 100px 0;
-        }
-
-        .data-card {
-            background: var(--surface-color);
-            padding: 40px 30px;
-            border-radius: 20px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
-        }
-
-        .data-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
-            border-color: rgba(139, 92, 246, 0.3);
-        }
-
-        .data-card h2 {
-            font-size: 3rem;
-            margin-bottom: 10px;
-            color: #fff;
-        }
-
-        /* Timeline / Experience */
-        .section-title {
-            font-size: 2.5rem;
-            margin-bottom: 50px;
-            font-weight: 600;
-        }
-
-        .timeline {
-            position: relative;
-            padding-left: 40px;
-            border-left: 2px solid rgba(255,255,255,0.1);
-            margin-bottom: 100px;
-        }
-
-        .timeline-item {
-            margin-bottom: 60px;
-            position: relative;
-        }
-
-        .timeline-item::before {
-            content: '';
-            position: absolute;
-            left: -49px;
-            top: 5px;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: var(--accent-gradient);
-            border: 4px solid var(--bg-color);
-        }
-
-        .timeline-card {
-            background: var(--surface-color);
-            padding: 30px;
-            border-radius: 16px;
-            border: 1px solid rgba(255,255,255,0.05);
-            transition: var(--transition);
-            cursor: pointer;
-        }
-
-        .timeline-card:hover {
-            transform: scale(1.02);
-            background: rgba(255,255,255,0.05);
-        }
-
-        .timeline-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-        }
-
-        .timeline-card .meta {
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-            margin-bottom: 20px;
-        }
-
-        /* Skills Tags */
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-bottom: 100px;
-        }
-
-        .skill-tag {
-            padding: 10px 20px;
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 30px;
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-
-        .skill-tag:hover {
-            background: var(--text-primary);
-            color: var(--bg-color);
-            transform: translateY(-3px);
-        }
-
-        /* Contact */
-        .contact-section {
-            text-align: center;
-            padding: 100px 0;
-            border-top: 1px solid rgba(255,255,255,0.1);
-        }
-
-        .contact-link {
-            display: inline-block;
-            margin: 20px 10px;
-            padding: 15px 30px;
-            background: var(--text-primary);
-            color: var(--bg-color);
-            text-decoration: none;
-            border-radius: 30px;
-            font-weight: 600;
-            transition: var(--transition);
-        }
-
-        .contact-link:hover {
-            opacity: 0.8;
-            transform: scale(1.05);
-        }
-    </style>
+    <title>AI Product Manager & Strategist Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <nav>
-        <h3>Z. Nicole [cite: 1]</h3>
-        <h3>AI Product Manager</h3>
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#hero" class="logo">● Portfolio</a>
+            <ul class="nav-links">
+                <li><a href="#journey">Journey</a></li>
+                <li><a href="#insights">Insights</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#hobbies">Hobbies</a></li>
+            </ul>
+            <div class="nav-actions">
+                <button id="theme-toggle" aria-label="Toggle Dark Mode">🌙</button>
+                <a href="#contact" class="btn-primary small">Contact Me</a>
+                <div class="hamburger">
+                    <span></span><span></span><span></span>
+                </div>
+            </div>
+        </div>
     </nav>
 
-    <div class="container">
-        <section class="hero fade-in-up">
-            <h1>你好，我是周栩 [cite: 1]</h1>
-            <p>对互联网 AI产品策划与Agent 智能体应用场景有浓烈兴趣。致力于通过需求拆解、逻辑分析探索人机交互的新边界 [cite: 4]。</p>
-        </section>
-
-        <section class="data-grid fade-in-up">
-            <div class="data-card">
-                <h2>5x</h2>
-                <p>独立负责宣传营销，实现AI产品 PV增长5倍 </p>
-            </div>
-            <div class="data-card">
-                <h2>50+</h2>
-                <p>覆盖真实用户query，系统性评估大模型多维度能力 </p>
-            </div>
-            <div class="data-card">
-                <h2>3500+</h2>
-                <p>统筹大型活动，线上直播观看人数突破峰值 </p>
-            </div>
-        </section>
-
-        <h2 class="section-title fade-in-up">核心经历</h2>
-        <div class="timeline">
-            <div class="timeline-item fade-in-up">
-                <div class="timeline-card">
-                    <h3>AI Agent 产品实习生 @ 腾讯IEG Global </h3>
-                    <div class="meta">中国深圳 | 2025.10-至今 [cite: 10, 11]</div>
-                    <ul>
-                        <li><strong>大模型评测：</strong> 规划每日例行人工评测，采用自动化评测系统，协同算法团队制定优化策略，显著提升输出效果与用户留存 。</li>
-                        <li><strong>产品功能迭代：</strong> 面向游戏数据分析场景，使用Figma/Adobe XD完成原型设计，推进功能从方案落地的完整闭环 [cite: 13]。</li>
-                        <li><strong>市场与竞品洞察：</strong> 对AI+BI与通用型Agent展开调研，产出调研报告并向团队月度汇报，提供关键市场洞察 。</li>
-                    </ul>
+    <section id="hero" class="section">
+        <div class="container hero-content">
+            <div class="hero-text">
+                <h1>Hi, I'm <span class="highlight">Your Name</span></h1>
+                <p class="tagline">Transforming scattered data into clear insights.</p>
+                <div class="typing-container">
+                    I am a <span id="typing-text"></span><span class="cursor">|</span>
+                </div>
+                <p class="intro">
+                    Bridging the gap between artificial intelligence and global market needs. I specialize in building data-driven AI agents and crafting strategies that resonate across diverse cultures and gaming ecosystems.
+                </p>
+                <div class="hero-buttons">
+                    <a href="#journey" class="btn-primary">View My Journey</a>
+                    <a href="#contact" class="btn-secondary">Contact Me</a>
                 </div>
             </div>
-
-            <div class="timeline-item fade-in-up">
-                <div class="timeline-card">
-                    <h3>公关实习生 @ 美国伟达公关 (WPP达邦集团) [cite: 15, 16]</h3>
-                    <div class="meta">中国上海 | 2023.06-2023.09 [cite: 17]</div>
-                    <ul>
-                        <li><strong>市场调研与策略：</strong> 围绕Society 5.0元宇宙概念及AI技术传播趋势进行分析，明确AI技术在中国市场的传播重点 。</li>
-                        <li><strong>内容传播：</strong> 撰写中英新闻稿件发布于超20家主流媒体，平均观众触达量达百万 [cite: 18]。</li>
-                    </ul>
-                </div>
+            <div class="hero-image">
+                <div class="image-placeholder">Profile Image</div>
             </div>
+        </div>
+    </section>
 
-            <div class="timeline-item fade-in-up">
-                <div class="timeline-card">
-                    <h3>主策划人 & 总导演 @ 华盛顿大学中国学生会 [cite: 23, 28]</h3>
-                    <div class="meta">2021.09-2024.06 [cite: 25]</div>
-                    <ul>
-                        <li>带领80+人的团队统筹春晚等大型活动，监管内部节目荣获最高评分 [cite: 29, 31, 32]。</li>
-                        <li>运营公众号20000+关注，推文日均阅读量增长7倍 。</li>
-                    </ul>
+    <section id="journey" class="section">
+        <div class="container">
+            <h2 class="section-title">My Journey as an AI PM</h2>
+            <div class="timeline">
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content card">
+                        <h3>DataBrain Agent Development</h3>
+                        <p class="date">2024 - Present</p>
+                        <p class="short-desc">Led the product cycle for a proprietary data analytics AI agent.</p>
+                        <div class="details">
+                            <ul>
+                                <li>Collaborated with engineering to define NLP capabilities.</li>
+                                <li>Designed user workflows mimicking human data analysts.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="timeline-item" onclick="toggleTimeline(this)">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content card">
+                        <h3>Game Studio Collaborations</h3>
+                        <p class="date">2023 - 2024</p>
+                        <p class="short-desc">Solved real-world data analytics problems for AA game studios.</p>
+                        <div class="details">
+                            <ul>
+                                <li>Integrated AI telemetry tools to track player retention.</li>
+                                <li>Delivered actionable insights boosting engagement by 15%.</li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </section>
 
-        <h2 class="section-title fade-in-up">教育背景</h2>
-        <div class="data-grid fade-in-up" style="margin-bottom: 100px; margin-top: 0;">
-            <div class="data-card">
-                <h3>伦敦政治经济学院 </h3>
-                <p style="margin-top: 10px; color: var(--text-secondary);">硕士 全球媒体与传播 </p>
-                <p style="color: var(--text-secondary);">2024.09 - 2025.12 </p>
-                <p style="margin-top: 10px; font-size: 0.9rem;">荣誉：研究生获全球优秀奖学金 [cite: 37]</p>
+    <section id="insights" class="section bg-alt">
+        <div class="container">
+            <h2 class="section-title">Global Marketing Insights</h2>
+            <div class="filter-container" id="insight-filters">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="gaming">Gaming</button>
+                <button class="filter-btn" data-filter="culture">Cross-Cultural</button>
             </div>
-            <div class="data-card">
-                <h3>美国华盛顿大学 </h3>
-                <p style="margin-top: 10px; color: var(--text-secondary);">本科 社会学与国际关系 </p>
-                <p style="color: var(--text-secondary);">2020.09 - 2024.06 </p>
-                <p style="margin-top: 10px; font-size: 0.9rem;">荣誉：连续评入院长名单 [cite: 37]</p>
+            <div class="grid insights-grid">
+                <div class="card insight-card" data-category="gaming">
+                    <span class="tag">Gaming Trends</span>
+                    <h3>The Rise of AI NPCs</h3>
+                    <p>How large language models are transforming player interaction in RPGs globally.</p>
+                </div>
+                <div class="card insight-card" data-category="culture">
+                    <span class="tag">Cross-Cultural</span>
+                    <h3>Localization vs. Culturalization</h3>
+                    <p>Why translating your marketing copy isn't enough for the APAC market.</p>
+                </div>
+                <div class="card insight-card" data-category="gaming">
+                    <span class="tag">Strategy</span>
+                    <h3>Monetization Ethics</h3>
+                    <p>Balancing player satisfaction with sustainable revenue models in mobile gaming.</p>
+                </div>
             </div>
         </div>
+    </section>
 
-        <h2 class="section-title fade-in-up">工具与技能矩阵</h2>
-        <div class="skills-container fade-in-up">
-            <div class="skill-tag">Agentic AI工具 (Coze, Manus, Genspark) </div>
-            <div class="skill-tag">Vibe Coding (Cursor, Claude, Gemini) </div>
-            <div class="skill-tag">原型设计 (Figma, Adobe XD) </div>
-            <div class="skill-tag">数据分析 (R-code, Excel) </div>
-            <div class="skill-tag">视觉设计 (Photoshop, Canva) </div>
-            <div class="skill-tag">英语 (专业水平, GRE-333) [cite: 36]</div>
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Featured Projects</h2>
+            <div class="grid projects-grid">
+                <div class="card project-card" onclick="openModal('project1')">
+                    <div class="card-img-placeholder">Thumbnail</div>
+                    <div class="card-body">
+                        <h3>AI Data Agent for Game Analytics</h3>
+                        <p>An automated dashboard translating raw SQL to natural language reports.</p>
+                        <span class="pill">AI</span> <span class="pill">Data</span>
+                    </div>
+                </div>
+                <div class="card project-card" onclick="openModal('project2')">
+                    <div class="card-img-placeholder">Thumbnail</div>
+                    <div class="card-body">
+                        <h3>Down Syndrome Media Representation</h3>
+                        <p>A comprehensive research paper on inclusivity in modern media.</p>
+                        <span class="pill">Research</span>
+                    </div>
+                </div>
+            </div>
         </div>
+    </section>
 
-        <section class="contact-section fade-in-up">
-            <h2 style="font-size: 3rem; margin-bottom: 20px;">开启对话</h2>
-            <p style="color: var(--text-secondary); margin-bottom: 40px;">期待在AI与产品交叉的领域探索更多可能。</p>
-            <a href="mailto:13925330092@139.com" class="contact-link">发送邮件 </a>
-            <a href="tel:13925330092" class="contact-link" style="background: transparent; border: 1px solid var(--text-primary); color: var(--text-primary);">致电联系 </a>
-        </section>
+    <section id="hobbies" class="section bg-alt">
+        <div class="container text-center">
+            <h2 class="section-title">Beyond Work</h2>
+            <div class="hobbies-flex">
+                <div class="hobby-item">
+                    <div class="hobby-icon">✈️</div>
+                    <p>Traveling</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">🎮</div>
+                    <p>Game Exploration</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">📊</div>
+                    <p>Data Storytelling</p>
+                </div>
+                <div class="hobby-item">
+                    <div class="hobby-icon">📸</div>
+                    <p>Photography</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="section">
+        <div class="container contact-container">
+            <div class="contact-info">
+                <h2 class="section-title">Let's Connect</h2>
+                <p>I'm currently open for new opportunities in AI Product Management and Global Strategy.</p>
+                <div class="social-links">
+                    <a href="#">LinkedIn</a>
+                    <a href="#">GitHub</a>
+                    <a href="#">Email Me</a>
+                </div>
+            </div>
+            <form id="contact-form" class="card">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" id="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="message">Message</label>
+                    <textarea id="message" rows="4" required></textarea>
+                </div>
+                <button type="submit" class="btn-primary w-100">Send Message</button>
+                <p id="form-status" class="hidden"></p>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Your Name. Designed with a Kuse aesthetic.</p>
+    </footer>
+
+    <div id="project-modal" class="modal">
+        <div class="modal-content card">
+            <span class="close-modal" onclick="closeModal()">&times;</span>
+            <h2 id="modal-title">Project Title</h2>
+            <p id="modal-desc">Detailed description goes here...</p>
+        </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const observerOptions = {
-                root: null,
-                rootMargin: '0px',
-                threshold: 0.15
-            };
-
-            const observer = new IntersectionObserver((entries, observer) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        entry.target.classList.add('visible');
-                        observer.unobserve(entry.target);
-                    }
-                });
-            }, observerOptions);
-
-            document.querySelectorAll('.fade-in-up').forEach((elem) => {
-                observer.observe(elem);
-            });
-        });
-    </script>
+    <script src="script.js"></script>
 </body>
 </html>
